@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class BotController extends AbstractController
 {
     /**
-     * @Route("/bot", name="bot")
+     * @Route("/", name="bot")
      */
     public function index(): Response
     {
