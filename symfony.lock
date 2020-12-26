@@ -1,4 +1,17 @@
 {
+    "boshurik/telegram-bot-bundle": {
+        "version": "3.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.1",
+            "ref": "a22989df249e0e7e28fd87d1daec1fe4c5cedcd0"
+        },
+        "files": [
+            "config/packages/boshurik_telegram_bot.yaml",
+            "config/routes/boshurik_telegram_bot.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -231,6 +244,9 @@
     },
     "symfony/yaml": {
         "version": "v5.2.1"
+    },
+    "telegram-bot/api": {
+        "version": "v2.3.17"
     },
     "voku/portable-ascii": {
         "version": "1.5.6"

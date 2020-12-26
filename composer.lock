@@ -4,8 +4,73 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5adc8a0be22bcac2446c3927a1096989",
+    "content-hash": "ee7701fee45cc50457c36dd57261d8a5",
     "packages": [
+        {
+            "name": "boshurik/telegram-bot-bundle",
+            "version": "4.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/BoShurik/TelegramBotBundle.git",
+                "reference": "19c3f841f852f5852023865feeca6735629854c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/BoShurik/TelegramBotBundle/zipball/19c3f841f852f5852023865feeca6735629854c1",
+                "reference": "19c3f841f852f5852023865feeca6735629854c1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": "^7.2",
+                "symfony/console": "^4.4 || ^5.0",
+                "symfony/event-dispatcher": "^4.4 || ^5.0",
+                "symfony/framework-bundle": "^4.4 || ^5.0",
+                "telegram-bot/api": "^2.3.14"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.1",
+                "php-mock/php-mock-phpunit": "^2.6",
+                "phpunit/phpunit": "^8.0",
+                "psalm/plugin-symfony": "^1.2",
+                "symfony/messenger": "^4.4 || ^5.0",
+                "symfony/security-guard": "^4.4 || ^5.0",
+                "vimeo/psalm": "^3.10"
+            },
+            "suggest": {
+                "symfony/messenger": "Required to handle messages with queues",
+                "symfony/security-guard": "Required to implement user authentication through Telegram"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BoShurik\\TelegramBotBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Borisov",
+                    "email": "boshurik@gmail.com"
+                },
+                {
+                    "name": "Community",
+                    "homepage": "https://github.com/BoShurik/TelegramBotBundle/graphs/contributors"
+                }
+            ],
+            "description": "Telegram bot bundle",
+            "time": "2020-10-24T07:42:24+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "1.11.1",
@@ -3630,6 +3695,62 @@
                 }
             ],
             "time": "2020-12-08T17:02:38+00:00"
+        },
+        {
+            "name": "telegram-bot/api",
+            "version": "v2.3.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TelegramBot/Api.git",
+                "reference": "9453b4e050db779a156aec37ba3a41937cca257e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TelegramBot/Api/zipball/9453b4e050db779a156aec37ba3a41937cca257e",
+                "reference": "9453b4e050db779a156aec37ba3a41937cca257e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TelegramBot\\Api\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ilya Gusev",
+                    "email": "mail@igusev.ru",
+                    "homepage": "https://php-cat.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Wrapper for Telegram Bot API",
+            "homepage": "https://github.com/TelegramBot/Api",
+            "keywords": [
+                "bot",
+                "bot api",
+                "php",
+                "telegram"
+            ],
+            "time": "2020-09-04T12:56:09+00:00"
         },
         {
             "name": "voku/portable-ascii",
