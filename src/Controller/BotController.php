@@ -26,11 +26,7 @@ class BotController extends AbstractController
     {
         $response = json_decode((string)$request->getContent());
         $firstBot = $bot->getBot('first');
-        $firstBot->setWebhook(
-            [
-                'url'=>'https://morning-basin-80539.herokuapp.com'
-            ]
-        );
+
         if(!empty($response) && !empty($response->message)){
             $userId = $response->message->from->id;
             $messageText = mb_strtolower($response->message->text);
@@ -45,7 +41,7 @@ class BotController extends AbstractController
 
 
         }
-        return new Response('ok');
+        return new JsonResponse(['ok']);
     }
 
 
