@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\MessageProcessor\MessageProcessor;
 use Illuminate\Support\Facades\Log;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,6 +16,17 @@ use Borsaco\TelegramBotApiBundle\Service\Bot;
 
 class BotController extends AbstractController
 {
+    protected $messageProcessor;
+
+    /**
+     * BotController constructor.
+     * @param $messageProcessor
+     */
+    public function __construct(MessageProcessor $messageProcessor)
+    {
+        $this->messageProcessor = $messageProcessor;
+    }
+
     /**
      * @Route("/", methods={"POST"}, name="bot")
      * @param Bot $bot
@@ -25,33 +37,8 @@ class BotController extends AbstractController
     public function telegram(Bot $bot, Request $request): JsonResponse
     {
         $response = json_decode((string)$request->getContent());
-        $firstBot = $bot->getBot('first');
+        $this->messageProcessor->handle($response);
 
-        if(!empty($response) && !empty($response->message)){
-            $userId = $response->message->from->id;
-            $messageText = mb_strtolower($response->message->text);
-            switch ($messageText){
-                case "/start":
-                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Привет']);
-                    break;
-                case "/help":
-                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Чем помочь?']);
-                    break;
-                case "и че":
-                case "и чё":
-                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Через плечо']);
-                    break;
-                case "спасибо":
-                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'от души братуха!!! от души']);
-                    break;
-                case "танцевать":
-                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk']);
-                    break;
-
-            }
-
-
-        }
         return new JsonResponse(['ok']);
     }
 
