@@ -28,7 +28,17 @@ class BotController extends AbstractController
         $firstBot = $bot->getBot('first');
         if(!empty($response) && !empty($response->message)){
             $userId = $response->message->from->id;
-            $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'hi']);
+            $messageText = mb_strtolower($response->message->text);
+            switch ($messageText){
+                case "/start":
+                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Привет']);
+                    break;
+                case "и че":
+                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Через плечо']);
+                    break;
+            }
+
+
         }
         return new Response('ok');
     }
