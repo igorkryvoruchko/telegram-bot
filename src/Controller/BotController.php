@@ -37,9 +37,17 @@ class BotController extends AbstractController
                 case "/help":
                     $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Чем помочь?']);
                     break;
+                case "и че":
                 case "и чё":
                     $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'Через плечо']);
                     break;
+                case "спасибо":
+                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'от души братуха!!! от души']);
+                    break;
+                case "танцевать":
+                    $firstBot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk']);
+                    break;
+
             }
 
 
