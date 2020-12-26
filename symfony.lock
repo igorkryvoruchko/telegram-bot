@@ -1,4 +1,7 @@
 {
+    "borsaco/telegram-bot-api-bundle": {
+        "version": "1.0.5"
+    },
     "boshurik/telegram-bot-bundle": {
         "version": "3.1",
         "recipe": {

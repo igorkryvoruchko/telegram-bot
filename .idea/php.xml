@@ -59,6 +59,7 @@
       <path value="$PROJECT_DIR$/vendor/illuminate/collections" />
       <path value="$PROJECT_DIR$/vendor/boshurik/telegram-bot-bundle" />
       <path value="$PROJECT_DIR$/vendor/telegram-bot/api" />
+      <path value="$PROJECT_DIR$/vendor/borsaco/telegram-bot-api-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

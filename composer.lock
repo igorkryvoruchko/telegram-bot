@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee7701fee45cc50457c36dd57261d8a5",
+    "content-hash": "0503ef9e48fa74e1a207d1480b29bb8f",
     "packages": [
+        {
+            "name": "borsaco/telegram-bot-api-bundle",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/borsaco/TelegramBotApiBundle.git",
+                "reference": "5af9597368eea556e5792add053bdd977e625313"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/borsaco/TelegramBotApiBundle/zipball/5af9597368eea556e5792add053bdd977e625313",
+                "reference": "5af9597368eea556e5792add053bdd977e625313",
+                "shasum": ""
+            },
+            "require": {
+                "irazasyed/telegram-bot-sdk": "^3.1",
+                "php": ">=7.1",
+                "symfony/framework-bundle": "^5.1"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Borsaco\\TelegramBotApiBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alireza Seddighi",
+                    "email": "seddighi@borsaco.ir",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple wrapper for telegram-bot-api.",
+            "homepage": "https://borsaco.ir",
+            "keywords": [
+                "Telegram-Bot-API",
+                "api",
+                "bot",
+                "php",
+                "symfony",
+                "telegram"
+            ],
+            "time": "2020-08-03T14:58:48+00:00"
+        },
         {
             "name": "boshurik/telegram-bot-bundle",
             "version": "4.1.1",
