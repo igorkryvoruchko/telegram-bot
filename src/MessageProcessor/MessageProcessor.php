@@ -5,18 +5,24 @@ namespace App\MessageProcessor;
 
 
 use Borsaco\TelegramBotApiBundle\Service\Bot;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class MessageProcessor
 {
     protected $bot;
 
+    private $client;
+
     /**
      * MessageProcessor constructor.
-     * @param $bot
+     * @param Bot $bot
+     * @param HttpClientInterface $client
      */
-    public function __construct(Bot $bot)
+    public function __construct(Bot $bot, HttpClientInterface $client)
     {
         $this->bot = $bot->getBot('first');
+
+        $this->client = $client;
     }
 
 
@@ -42,6 +48,12 @@ class MessageProcessor
                 case "танцевать":
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk']);
                     break;
+                case "курс валют":
+                    foreach ($this->getRates() as $rate){
+                        $this->bot->sendMessage(['chat_id' => $userId, 'text' => $rate['ccy'].' покупка: '.$rate['buy']. $rate['base_ccy'] . ' продажа: '.$rate['sale']. $rate['base_ccy'] ]);
+                    }
+
+                    break;
                 default:
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Я не понимаю о чем вы!']);
                     break;
@@ -49,5 +61,15 @@ class MessageProcessor
 
 
         }
+    }
+
+    protected function getRates()
+    {
+        $response = $this->client->request(
+            'GET',
+            'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
+        );
+
+        return $response->toArray();
     }
 }

@@ -60,6 +60,7 @@
       <path value="$PROJECT_DIR$/vendor/boshurik/telegram-bot-bundle" />
       <path value="$PROJECT_DIR$/vendor/telegram-bot/api" />
       <path value="$PROJECT_DIR$/vendor/borsaco/telegram-bot-api-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />
