@@ -42,6 +42,9 @@ class MessageProcessor
                 case "танцевать":
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk']);
                     break;
+                default:
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Я не понимаю о чем вы!']);
+                    break;
             }
 
 
