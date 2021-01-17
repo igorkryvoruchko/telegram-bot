@@ -52,7 +52,9 @@ class MessageProcessor
                     foreach ($this->getRates() as $rate){
                         $this->bot->sendMessage(['chat_id' => $userId, 'text' => $rate['ccy'].' покупка: '.$rate['buy']. $rate['base_ccy'] . ' продажа: '.$rate['sale']. $rate['base_ccy'] ]);
                     }
-
+                    break;
+                case "пакет":
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://github.com/borsaco/TelegramBotApiBundle']);
                     break;
                 default:
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Я не понимаю о чем вы!']);
