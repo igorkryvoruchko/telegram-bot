@@ -61,14 +61,13 @@ class MessageProcessor
                 case "/танцевать":
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk', 'reply_markup' => $replay_keyboard]);
                     break;
-//                case "/оплатить":
-//                    $inline_keyboard = $keyboard->make()->inline()
-//                        ->row(
-//                            $keyboard->inlineButton(['text' => 'наличные', 'callback_data' => 'cash']),
-//                            $keyboard->inlineButton(['text' => 'безнал', 'callback_data' => 'epay'])
-//                        );
-//                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => '', 'reply_markup' => $inline_keyboard]);
-//                    break;
+                case "/оплатить":
+                    $inline_keyboard = $keyboard->make()->inline()
+                        ->row(
+                            $keyboard->inlineButton(['text' => 'наличные', 'callback_data' => 'cash'])
+                        );
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => '', 'reply_markup' => $inline_keyboard]);
+                    break;
                 case "/курс валют":
                     foreach ($this->getRates() as $rate){
                         $this->bot->sendMessage(['chat_id' => $userId, 'text' => $rate['ccy'].' покупка: '.$rate['buy']. $rate['base_ccy'] . ' продажа: '.$rate['sale']. $rate['base_ccy'] ]);
