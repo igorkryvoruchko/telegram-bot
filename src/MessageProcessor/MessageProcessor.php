@@ -32,7 +32,7 @@ class MessageProcessor
         if(!empty($response) && !empty($response->message)){
             $keyboard = new Keyboard();
             $replay_keyboard = $keyboard->make()->row(
-                $keyboard->Button(['text' => 'button1'])
+                $keyboard->Button(['text' => 'button1', 'resize_keyboard' => true])
             );
             $userId = $response->message->from->id;
             $messageText = mb_strtolower($response->message->text);
