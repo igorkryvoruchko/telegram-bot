@@ -69,13 +69,16 @@ class MessageProcessor
                         );
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Как хотите оплатить?', 'reply_markup' => $inline_keyboard]);
                     break;
+                case "/пакет":
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://github.com/borsaco/TelegramBotApiBundle', 'reply_markup' => $replay_keyboard]);
+                    break;
                 case "/курс валют":
                     foreach ($this->getRates() as $rate){
                         $this->bot->sendMessage(['chat_id' => $userId, 'text' => $rate['ccy'].' покупка: '.$rate['buy']. $rate['base_ccy'] . ' продажа: '.$rate['sale']. $rate['base_ccy'] ]);
                     }
                     break;
-                case "/пакет":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://github.com/borsaco/TelegramBotApiBundle', 'reply_markup' => $replay_keyboard]);
+                case "cash":
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Принято, наличка', 'reply_markup' => $replay_keyboard]);
                     break;
                 case "/кто красавчик?":
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Конечно Игорь Криворучко!', 'reply_markup' => $replay_keyboard]);
