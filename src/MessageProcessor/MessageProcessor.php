@@ -38,7 +38,8 @@ class MessageProcessor
                 )
                 ->row(
                     $keyboard->Button(['text' => '/танцевать']),
-                    $keyboard->Button(['text' => '/курс валют'])
+                    $keyboard->Button(['text' => '/курс валют']),
+                    $keyboard->Button(['text' => '/оплатить'])
                 )
             ;
             $userId = $response->message->from->id;
