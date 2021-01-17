@@ -64,7 +64,8 @@ class MessageProcessor
                 case "/оплатить":
                     $inline_keyboard = $keyboard->make()->inline()
                         ->row(
-                            $keyboard->inlineButton(['text' => 'наличные', 'callback_data' => 'cash'])
+                            $keyboard->inlineButton(['text' => 'Наличные', 'callback_data' => 'cash']),
+                            $keyboard->inlineButton(['text' => 'Безналичные', 'callback_data' => 'cashless'])
                         );
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Как хотите оплатить?', 'reply_markup' => $inline_keyboard]);
                     break;
