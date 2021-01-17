@@ -6,6 +6,7 @@ namespace App\MessageProcessor;
 
 use Borsaco\TelegramBotApiBundle\Service\Bot;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Telegram\Bot\Keyboard\Keyboard;
 
 class MessageProcessor
 {
@@ -29,11 +30,15 @@ class MessageProcessor
     public function handle($response)
     {
         if(!empty($response) && !empty($response->message)){
+            $keyboard = new Keyboard();
+            $replay_keyboard = $keyboard->make()->row(
+                $keyboard->Button(['text' => 'button1'])
+            );
             $userId = $response->message->from->id;
             $messageText = mb_strtolower($response->message->text);
             switch ($messageText){
                 case "/start":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Привет']);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Привет', 'reply_markup' => $replay_keyboard]);
                     break;
                 case "/help":
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Чем помочь?']);
