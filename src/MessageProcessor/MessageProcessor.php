@@ -66,7 +66,7 @@ class MessageProcessor
                         ->row(
                             $keyboard->inlineButton(['text' => 'наличные', 'callback_data' => 'cash'])
                         );
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => '', 'reply_markup' => $inline_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Как хотите оплатить?', 'reply_markup' => $inline_keyboard]);
                     break;
                 case "/курс валют":
                     foreach ($this->getRates() as $rate){
