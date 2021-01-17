@@ -41,6 +41,12 @@ class MessageProcessor
                     $keyboard->Button(['text' => '/курс валют'])
                 )
             ;
+            $inline_keyboard = $keyboard->make()->inline()
+                ->row(
+                    $keyboard->inlineButton(['text' => 'наличные']),
+                    $keyboard->inlineButton(['text' => 'безнал'])
+                )
+            ;
             $userId = $response->message->from->id;
             $messageText = mb_strtolower($response->message->text);
             switch ($messageText){
@@ -58,7 +64,7 @@ class MessageProcessor
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'от души братуха!!! от души', 'reply_markup' => $replay_keyboard]);
                     break;
                 case "/танцевать":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk', 'reply_markup' => $inline_keyboard]);
                     break;
                 case "/курс валют":
                     foreach ($this->getRates() as $rate){
