@@ -21,13 +21,13 @@ class MessageProcessor
      * @param Bot $bot
      * @param HttpClientInterface $client
      */
-    public function __construct(Bot $bot, HttpClientInterface $client, Keyboard $keyboard)
+    public function __construct(Bot $bot, HttpClientInterface $client)
     {
         $this->bot = $bot->getBot('first');
 
         $this->client = $client;
 
-        $this->keyboard = $keyboard;
+        $this->keyboard = new Keyboard();
     }
 
     protected function keyboard()
