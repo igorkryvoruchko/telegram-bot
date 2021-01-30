@@ -14,63 +14,75 @@ class MessageProcessor
 
     private $client;
 
+    protected $keyboard;
+
     /**
      * MessageProcessor constructor.
      * @param Bot $bot
      * @param HttpClientInterface $client
      */
-    public function __construct(Bot $bot, HttpClientInterface $client)
+    public function __construct(Bot $bot, HttpClientInterface $client, Keyboard $keyboard)
     {
         $this->bot = $bot->getBot('first');
 
         $this->client = $client;
+
+        $this->keyboard = $keyboard;
+    }
+
+    protected function keyboard()
+    {
+        return new Keyboard();
+    }
+
+    protected function replayKeyboard()
+    {
+        return $this->keyboard->make(['resize_keyboard' => true])
+            ->row(
+                $this->keyboard->Button(['text' => '/кто красавчик?']),
+                $this->keyboard->Button(['text' => '/пакет'])
+            )
+            ->row(
+                $this->keyboard->Button(['text' => '/танцевать']),
+                $this->keyboard->Button(['text' => '/курс валют']),
+                $this->keyboard->Button(['text' => '/оплатить'])
+            )
+        ;
     }
 
 
     public function handle($response)
     {
         if(!empty($response) && !empty($response->message)){
-            $keyboard = new Keyboard();
-            $replay_keyboard = $keyboard->make(['resize_keyboard' => true])
-                ->row(
-                    $keyboard->Button(['text' => '/кто красавчик?']),
-                    $keyboard->Button(['text' => '/пакет'])
-                )
-                ->row(
-                    $keyboard->Button(['text' => '/танцевать']),
-                    $keyboard->Button(['text' => '/курс валют']),
-                    $keyboard->Button(['text' => '/оплатить'])
-                )
-            ;
             $userId = $response->message->from->id;
             $messageText = mb_strtolower($response->message->text);
             switch ($messageText){
                 case "/start":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Привет', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Привет', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "/help":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Чем помочь?', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Чем помочь?', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "и че":
                 case "и чё":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Через плечо', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Через плечо', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "спасибо":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'от души братуха!!! от души', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'от души братуха!!! от души', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "/танцевать":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://www.youtube.com/watch?v=w9okGAKOyYk', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "/оплатить":
-                    $inline_keyboard = $keyboard->make()->inline()
+                    $inline_keyboard = $this->keyboard->make()->inline()
                         ->row(
-                            $keyboard->inlineButton(['text' => 'Наличные', 'callback_data' => 'cash']),
-                            $keyboard->inlineButton(['text' => 'Безналичные', 'callback_data' => 'cashless'])
+                            $this->keyboard->inlineButton(['text' => 'Наличные', 'callback_data' => 'cash']),
+                            $this->keyboard->inlineButton(['text' => 'Безналичные', 'callback_data' => 'cashless'])
                         );
                     $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Как хотите оплатить?', 'reply_markup' => $inline_keyboard]);
                     break;
                 case "/пакет":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://github.com/borsaco/TelegramBotApiBundle', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'https://github.com/borsaco/TelegramBotApiBundle', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "/курс валют":
                     foreach ($this->getRates() as $rate){
@@ -78,17 +90,19 @@ class MessageProcessor
                     }
                     break;
                 case "cash":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Принято, наличка', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Принято, наличка', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 case "/кто красавчик?":
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Конечно Игорь Криворучко!', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Конечно Игорь Криворучко!', 'reply_markup' => $this->replayKeyboard()]);
                     break;
                 default:
-                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Я не понимаю о чем вы!', 'reply_markup' => $replay_keyboard]);
+                    $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Я не понимаю о чем вы!', 'reply_markup' => $this->replayKeyboard()]);
                     break;
             }
 
 
+        }else{
+            $this->callBackQueryHandle($response);
         }
     }
 
@@ -100,5 +114,14 @@ class MessageProcessor
         );
 
         return $response->toArray();
+    }
+
+    protected function callBackQueryHandle($response)
+    {
+        if(!empty($response) && !empty($response->callback_query)){
+            $userId = $response->callback_query->from->id;
+            $data = mb_strtolower($response->callback_query->data);
+            $this->bot->sendMessage(['chat_id' => $userId, 'text' => 'Готово - '. $data, 'reply_markup' => $this->replayKeyboard()]);
+        }
     }
 }
